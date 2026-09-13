@@ -1,0 +1,43 @@
+{
+  "name": "demarkify",
+  "version": "1.0.0",
+  "description": "a fast, non-dependent tool/library to detect, decode, and remove hidden ai watermarks, steganography, invisible characters, homoglyphs, and even byte anomalies from any text.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "demarkify": "dist/app.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && chmod +x dist/cli.js",
+    "dev": "tsx src/cli.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "ai",
+    "watermark",
+    "steganography",
+    "sanitization",
+    "cleaner",
+    "zero-width",
+    "homoglyphs",
+    "unicode",
+    "cli"
+  ],
+  "author": "hnpf",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7",
+    "tsx": "^4.19.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
