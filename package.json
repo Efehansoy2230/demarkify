@@ -6,17 +6,31 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "demarkify": "dist/app.js"
+    "demarkify": "dist/cli.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json && chmod +x dist/cli.js",
     "dev": "tsx src/cli.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build && pnpm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hnpf/demarkify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hnpf/demarkify/issues"
+  },
+  "homepage": "https://github.com/hnpf/demarkify#readme",
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "ai",
