@@ -323,10 +323,7 @@ export async function main(): Promise<void> {
   }
 }
 
-// run when invoked as entrypoint
-if (process.argv[1] && (process.argv[1].endsWith('cli.ts') || process.argv[1].endsWith('cli.js') || process.argv[1].endsWith('demarkify'))) {
-  main().catch(err => {
-    console.error(`${c.red}Error:${c.reset}`, err.message);
-    process.exit(1);
-  });
-}
+main().catch(err => {
+  console.error(`${c.red}Error:${c.reset}`, err.message);
+  process.exit(1);
+});
