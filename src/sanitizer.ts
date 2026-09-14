@@ -5,6 +5,8 @@ import {
   isUnicodeTag,
   isVariationSelector,
   isNonPrintableControl,
+  isPrivateUse,
+  isFormatControl,
   normalizeFullwidth,
   normalizeMathAlphanumeric
 } from './constants.js';
@@ -60,6 +62,9 @@ export function sanitizeText(text: string, options: SanitizeOptions = {}): Sanit
       continue;
     }
     if (opts.stripControlChars && isNonPrintableControl(codePoint)) {
+      continue;
+    }
+    if (opts.stripZeroWidth && (isPrivateUse(codePoint) || isFormatControl(char))) {
       continue;
     }
     if (opts.normalizeSpaces && ANOMALOUS_WHITESPACE.has(codePoint)) {

@@ -100,6 +100,7 @@ export const ANOMALOUS_WHITESPACE: ReadonlyMap<number, CharMetadata> = new Map([
   [0x2029, { codePoint: 0x2029, category: 'anomalous_space', name: 'PARAGRAPH SEPARATOR', suggestedReplacement: '\n\n' }],
   [0x202F, { codePoint: 0x202F, category: 'anomalous_space', name: 'NARROW NO-BREAK SPACE', suggestedReplacement: ' ' }],
   [0x205F, { codePoint: 0x205F, category: 'anomalous_space', name: 'MEDIUM MATHEMATICAL SPACE', suggestedReplacement: ' ' }],
+  [0x2800, { codePoint: 0x2800, category: 'anomalous_space', name: 'BRAILLE PATTERN BLANK', suggestedReplacement: ' ' }],
   [0x3000, { codePoint: 0x3000, category: 'anomalous_space', name: 'IDEOGRAPHIC SPACE', suggestedReplacement: ' ' }],
   [0x0085, { codePoint: 0x0085, category: 'anomalous_space', name: 'NEXT LINE (NEL)', suggestedReplacement: '\n' }]
 ]);
@@ -133,6 +134,24 @@ export function isNonPrintableControl(codePoint: number): boolean {
     (codePoint >= 0x0E && codePoint <= 0x1F) ||
     (codePoint >= 0x7F && codePoint <= 0x9F)
   );
+}
+
+/**
+ * check if a codepoint is located inside unicode PUAs
+ */
+export function isPrivateUse(codePoint: number): boolean {
+  return (
+    (codePoint >= 0xE000 && codePoint <= 0xF8FF) ||
+    (codePoint >= 0xF0000 && codePoint <= 0xFFFFD) ||
+    (codePoint >= 0x100000 && codePoint <= 0x10FFFD)
+  );
+}
+
+/**
+ * check if a char matches unicode general cf
+ */
+export function isFormatControl(char: string): boolean {
+  return /\p{Cf}/u.test(char);
 }
 
 /**

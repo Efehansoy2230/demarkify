@@ -56,6 +56,14 @@ describe('detectWatermarks', () => {
     expect(result.matches.some(m => m.hex === 'U+0085')).toBe(true);
     expect(result.matches.some(m => m.hex === 'U+206A')).toBe(true);
   });
+
+  it('detects braille blanks and private use area anomalies', () => {
+    const text = 'prompt\u2800with\uE005hidden\u{F0001}pua';
+    const result = detectWatermarks(text);
+    expect(result.clean).toBe(false);
+    expect(result.matches.some(m => m.hex === 'U+2800')).toBe(true);
+    expect(result.categories.byte_anomaly).toBe(2);
+  });
 });
 
 describe('steganography decoders', () => {

@@ -5,6 +5,8 @@ import {
   isUnicodeTag,
   isVariationSelector,
   isNonPrintableControl,
+  isPrivateUse,
+  isFormatControl,
   normalizeFullwidth,
   normalizeMathAlphanumeric
 } from './constants.js';
@@ -364,6 +366,36 @@ export function detectWatermarks(text: string): DetectionResult {
         column,
         context: getContextSnippet(text, charIndex, hex),
         details: 'non-printable C0/C1 control code'
+      });
+    } else if (isPrivateUse(codePoint)) {
+      categories.byte_anomaly++;
+      matches.push({
+        category: 'byte_anomaly',
+        char,
+        codePoint,
+        hex,
+        name: `PRIVATE USE AREA (${hex})`,
+        index: charIndex,
+        byteOffset,
+        line,
+        column,
+        context: getContextSnippet(text, charIndex, hex),
+        details: 'unicode private use area char used to inject hidden glyphs or payloads'
+      });
+    } else if (isFormatControl(char)) {
+      categories.zero_width++;
+      matches.push({
+        category: 'zero_width',
+        char,
+        codePoint,
+        hex,
+        name: `FORMAT CONTROL (${hex})`,
+        index: charIndex,
+        byteOffset,
+        line,
+        column,
+        context: getContextSnippet(text, charIndex, hex),
+        details: 'procedurally detected Unicode Format (Cf) control character'
       });
     }
 

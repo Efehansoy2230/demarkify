@@ -66,6 +66,12 @@ describe('sanitizeText', () => {
     const result = sanitizeText(dirty);
     expect(result.cleanText).toBe('Line1\nLine2');
   });
+
+  it('normalizes braille blanks and strips PUA characters', () => {
+    const dirty = 'word1\u2800word2\uE005word3';
+    const result = sanitizeText(dirty);
+    expect(result.cleanText).toBe('word1 word2word3');
+  });
 });
 
 describe('transliterateAccentsToAscii', () => {
