@@ -17,7 +17,7 @@ describe('cli E2E integration', () => {
 
   it('displays version with --version', async () => {
     const { stdout } = await execPromise(`pnpm exec tsx "${CLI_PATH}" --version`);
-    expect(stdout).toContain('demarkify v1.0.0');
+    expect(stdout).toContain('demarkify v1.1.0');
   });
 
   it('clean string args directly', async () => {

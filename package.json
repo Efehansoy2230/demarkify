@@ -1,6 +1,6 @@
 {
   "name": "demarkify",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "a fast, non-dependent tool/library to detect, decode, and remove hidden ai watermarks, steganography, invisible characters, homoglyphs, and even byte anomalies from any text.",
   "type": "module",
   "main": "dist/index.js",

@@ -22,12 +22,13 @@ LLMS, ai text generation models, and tracking systems often integrate subtle, in
 
 - pure native nodejs / ts results in being extremely fast, lightweight, and secure.
 - deep watermark and steganography detection
-- zero width and invis codepoints: `ZWSP` (`U+200B`), `ZWNJ` (`U+200C`), `ZWJ` (`U+200D`), `BOM` (`U+FEFF`), `Word joiner` (`U+2060`), `soft hyphen` (`U+00AD`), `combining grapheme joiner` (`U+034F`), `mongolian vowel separator` (`U+180E`), `invisible operators` (`U+2061`-`U+2064`), etc.
-- detects and decodes hidden payload chars in the `U+E0020` / `U+E007E` range used for prompt injection or llm output tracking 
-- zerowidth and whitespace binary stego**: detects and decodes binary payloads embedded into zerowidth char sequences or trailing spaces/tabs.
+- zero width and invis codepoints: `ZWSP` (`U+200B`), `ZWNJ` (`U+200C`), `ZWJ` (`U+200D`), `BOM` (`U+FEFF`), `Word joiner` (`U+2060`), `soft hyphen` (`U+00AD`), `combining grapheme joiner` (`U+034F`), `hangul fillers` (`U+3164`, `U+FFA0`, `U+115F`, `U+1160`), `mongolian vowel separator` (`U+180E`), `invisible operators` (`U+2061`-`U+2064`), etc.
+- procedural unicode injection detection: catches unlisted `\p{Cf}` (Format) and `\p{Co}` (Private Use Area) injection markers.
+- detects and decodes hidden payload chars in the `U+E0000` / `U+E007F` range used for prompt injection or llm output tracking 
+- zerowidth and whitespace binary stego: detects and decodes binary payloads embedded into zerowidth char sequences, hangul filler patterns, or trailing spaces/tabs.
 - directional overrides & isolates: `LTR`/`RTL` marks, embeddings, overrides (`U+202A`–`U+202E`, `U+2066`/`U+2069`)
-- homoglyphs and confusable scripts: identifies lookalike chars swapped in from cyrillic, greek, fullwidth, or mathematical alphanumeric blocks
-- normalize non breaking spaces (`U+00A0`), thin spaces, em/en spaces, and ideographic spaces.
+- homoglyphs and confusable scripts: identifies lookalike chars swapped in from cyrillic, greek, fullwidth, or mathematical alphanumeric blocks (fraktur, bold, sans, double-struck, monospace)
+- normalize non breaking spaces (`U+00A0`), braille blanks (`U+2800`), thin spaces, em/en spaces, line/paragraph separators (`U+2028`/`U+2029`), and next-line markers (`U+0085`).
 - non-printable control chars and byte anomalies
 - complete scratch reconstruction: instead of naive regex replacement, text is parsed and rebuilt cleanly with canonical unicode normalizing (`NFC`/`NFKC`) and uniform line endings
 - versatile inputs: supports direct string arguments, stdin pipes, individual files, and even entire directories, recursively
@@ -61,11 +62,11 @@ precompiled standalone binaries are available for download on the [GitHub releas
 
 | platform | arch | download |
 | :--- | :--- | :--- |
-| **linux** | x86_64 | [`demarkify-v1.0.0-linux-x64.tar.gz`](https://github.com/hnpf/demarkify/releases/download/v1.0.0/demarkify-v1.0.0-linux-x64.tar.gz) |
-| **linux** | ARM64 / AArch64 | [`demarkify-v1.0.0-linux-arm64.tar.gz`](https://github.com/hnpf/demarkify/releases/download/v1.0.0/demarkify-v1.0.0-linux-arm64.tar.gz) |
-| **macOS** | Apple Silicon (M1/M2/M3/M4) | [`demarkify-v1.0.0-darwin-arm64.tar.gz`](https://github.com/hnpf/demarkify/releases/download/v1.0.0/demarkify-v1.0.0-darwin-arm64.tar.gz) |
-| **macOS** | Intel x86_64 | [`demarkify-v1.0.0-darwin-x64.tar.gz`](https://github.com/hnpf/demarkify/releases/download/v1.0.0/demarkify-v1.0.0-darwin-x64.tar.gz) |
-| **windows** | x86_64 | [`demarkify-v1.0.0-windows-x64.zip`](https://github.com/hnpf/demarkify/releases/download/v1.0.0/demarkify-v1.0.0-windows-x64.zip) |
+| **linux** | x86_64 | [`demarkify-v1.1.0-linux-x64.tar.gz`](https://github.com/hnpf/demarkify/releases/download/v1.1.0/demarkify-v1.1.0-linux-x64.tar.gz) |
+| **linux** | ARM64 / AArch64 | [`demarkify-v1.1.0-linux-arm64.tar.gz`](https://github.com/hnpf/demarkify/releases/download/v1.1.0/demarkify-v1.1.0-linux-arm64.tar.gz) |
+| **macOS** | Apple Silicon (M1/M2/M3/M4) | [`demarkify-v1.1.0-darwin-arm64.tar.gz`](https://github.com/hnpf/demarkify/releases/download/v1.1.0/demarkify-v1.1.0-darwin-arm64.tar.gz) |
+| **macOS** | Intel x86_64 | [`demarkify-v1.1.0-darwin-x64.tar.gz`](https://github.com/hnpf/demarkify/releases/download/v1.1.0/demarkify-v1.1.0-darwin-x64.tar.gz) |
+| **windows** | x86_64 | [`demarkify-v1.1.0-windows-x64.zip`](https://github.com/hnpf/demarkify/releases/download/v1.1.0/demarkify-v1.1.0-windows-x64.zip) |
 
 ---
 
