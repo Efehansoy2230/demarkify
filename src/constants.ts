@@ -30,6 +30,41 @@ export const INVISIBLE_CODEPOINTS: ReadonlyMap<number, CharMetadata> = new Map([
   [0xFFFB, { codePoint: 0xFFFB, category: 'zero_width', name: 'INTERLINEAR ANNOTATION TERMINATOR', description: 'invisible ruby annotation delimiter' }],
   [0xFFFC, { codePoint: 0xFFFC, category: 'zero_width', name: 'OBJECT REPLACEMENT CHARACTER', description: 'embedded object placeholder' }],
 
+  // hangul fillers (frequently used as invisible spaces / characters)
+  [0x115F, { codePoint: 0x115F, category: 'zero_width', name: 'HANGUL CHOSEONG FILLER', description: 'invisible hangul choseong filler character' }],
+  [0x1160, { codePoint: 0x1160, category: 'zero_width', name: 'HANGUL JUNGSEONG FILLER', description: 'invisible hangul jungseong filler character' }],
+  [0x3164, { codePoint: 0x3164, category: 'zero_width', name: 'HANGUL FILLER', description: 'invisible hangul filler space frequently abused in steganography' }],
+  [0xFFA0, { codePoint: 0xFFA0, category: 'zero_width', name: 'HALFWIDTH HANGUL FILLER', description: 'invisible halfwidth hangul filler' }],
+
+  // invisible marks & formatting controls
+  [0x070F, { codePoint: 0x070F, category: 'zero_width', name: 'SYRIAC ABBREVIATION MARK', description: 'invisible syriac abbreviation mark' }],
+  [0x08E2, { codePoint: 0x08E2, category: 'zero_width', name: 'ARABIC DISPUTED END OF AYAH', description: 'arabic formatting control character' }],
+  [0x2065, { codePoint: 0x2065, category: 'zero_width', name: 'RESERVED INVISIBLE FORMATTING', description: 'unassigned invisible formatting character' }],
+
+  // deprecated format characters (U+206A - U+206F)
+  [0x206A, { codePoint: 0x206A, category: 'zero_width', name: 'INHIBIT SYMMETRIC SWAPPING', description: 'deprecated invisible formatting control' }],
+  [0x206B, { codePoint: 0x206B, category: 'zero_width', name: 'ACTIVATE SYMMETRIC SWAPPING', description: 'deprecated invisible formatting control' }],
+  [0x206C, { codePoint: 0x206C, category: 'zero_width', name: 'INHIBIT ARABIC FORM SHAPING', description: 'deprecated invisible formatting control' }],
+  [0x206D, { codePoint: 0x206D, category: 'zero_width', name: 'ACTIVATE ARABIC FORM SHAPING', description: 'deprecated invisible formatting control' }],
+  [0x206E, { codePoint: 0x206E, category: 'zero_width', name: 'NATIONAL DIGIT SHAPES', description: 'deprecated invisible formatting control' }],
+  [0x206F, { codePoint: 0x206F, category: 'zero_width', name: 'NOMINAL DIGIT SHAPES', description: 'deprecated invisible formatting control' }],
+
+  // shorthand format controls (U+1BCA0 - U+1BCA3)
+  [0x1BCA0, { codePoint: 0x1BCA0, category: 'zero_width', name: 'SHORTHAND FORMAT LETTER OVERLAP', description: 'invisible shorthand format control' }],
+  [0x1BCA1, { codePoint: 0x1BCA1, category: 'zero_width', name: 'SHORTHAND FORMAT CONTINUING OVERLAP', description: 'invisible shorthand format control' }],
+  [0x1BCA2, { codePoint: 0x1BCA2, category: 'zero_width', name: 'SHORTHAND FORMAT DOWN STEP', description: 'invisible shorthand format control' }],
+  [0x1BCA3, { codePoint: 0x1BCA3, category: 'zero_width', name: 'SHORTHAND FORMAT UP STEP', description: 'invisible shorthand format control' }],
+
+  // musical invisible controls (U+1D173 - U+1D17A)
+  [0x1D173, { codePoint: 0x1D173, category: 'zero_width', name: 'MUSICAL SYMBOL BEGIN BEAM', description: 'invisible musical control' }],
+  [0x1D174, { codePoint: 0x1D174, category: 'zero_width', name: 'MUSICAL SYMBOL END BEAM', description: 'invisible musical control' }],
+  [0x1D175, { codePoint: 0x1D175, category: 'zero_width', name: 'MUSICAL SYMBOL BEGIN TIE', description: 'invisible musical control' }],
+  [0x1D176, { codePoint: 0x1D176, category: 'zero_width', name: 'MUSICAL SYMBOL END TIE', description: 'invisible musical control' }],
+  [0x1D177, { codePoint: 0x1D177, category: 'zero_width', name: 'MUSICAL SYMBOL BEGIN SLUR', description: 'invisible musical control' }],
+  [0x1D178, { codePoint: 0x1D178, category: 'zero_width', name: 'MUSICAL SYMBOL END SLUR', description: 'invisible musical control' }],
+  [0x1D179, { codePoint: 0x1D179, category: 'zero_width', name: 'MUSICAL SYMBOL BEGIN PHRASE', description: 'invisible musical control' }],
+  [0x1D17A, { codePoint: 0x1D17A, category: 'zero_width', name: 'MUSICAL SYMBOL END PHRASE', description: 'invisible musical control' }],
+
   // dir formatting (usually used to obscure or change text ordering n hide a payload)
   [0x200E, { codePoint: 0x200E, category: 'directional', name: 'LEFT-TO-RIGHT MARK' }],
   [0x200F, { codePoint: 0x200F, category: 'directional', name: 'RIGHT-TO-LEFT MARK' }],
@@ -61,26 +96,29 @@ export const ANOMALOUS_WHITESPACE: ReadonlyMap<number, CharMetadata> = new Map([
   [0x2008, { codePoint: 0x2008, category: 'anomalous_space', name: 'PUNCTUATION SPACE', suggestedReplacement: ' ' }],
   [0x2009, { codePoint: 0x2009, category: 'anomalous_space', name: 'THIN SPACE', suggestedReplacement: ' ' }],
   [0x200A, { codePoint: 0x200A, category: 'anomalous_space', name: 'HAIR SPACE', suggestedReplacement: ' ' }],
+  [0x2028, { codePoint: 0x2028, category: 'anomalous_space', name: 'LINE SEPARATOR', suggestedReplacement: '\n' }],
+  [0x2029, { codePoint: 0x2029, category: 'anomalous_space', name: 'PARAGRAPH SEPARATOR', suggestedReplacement: '\n\n' }],
   [0x202F, { codePoint: 0x202F, category: 'anomalous_space', name: 'NARROW NO-BREAK SPACE', suggestedReplacement: ' ' }],
   [0x205F, { codePoint: 0x205F, category: 'anomalous_space', name: 'MEDIUM MATHEMATICAL SPACE', suggestedReplacement: ' ' }],
-  [0x3000, { codePoint: 0x3000, category: 'anomalous_space', name: 'IDEOGRAPHIC SPACE', suggestedReplacement: ' ' }]
+  [0x3000, { codePoint: 0x3000, category: 'anomalous_space', name: 'IDEOGRAPHIC SPACE', suggestedReplacement: ' ' }],
+  [0x0085, { codePoint: 0x0085, category: 'anomalous_space', name: 'NEXT LINE (NEL)', suggestedReplacement: '\n' }]
 ]);
 
 /**
- * check if a codepoint is a unicode tag char (U+E0001 or U+E0020 / U+E007F)
+ * check if a codepoint is a unicode tag char (U+E0000 to U+E007F)
  */
 export function isUnicodeTag(codePoint: number): boolean {
-  return codePoint === 0xE0001 || (codePoint >= 0xE0020 && codePoint <= 0xE007F);
+  return (codePoint >= 0xE0000 && codePoint <= 0xE007F);
 }
 
 /**
- * check if a codepoint is a variation selector (U+FE00 - U+FE0F, U+E0100 - U+E01EF, U+180B - U+180D).
+ * check if a codepoint is a variation selector (U+FE00 - U+FE0F, U+E0100 - U+E01EF, U+180B - U+180F).
  */
 export function isVariationSelector(codePoint: number): boolean {
   return (
     (codePoint >= 0xFE00 && codePoint <= 0xFE0F) ||
     (codePoint >= 0xE0100 && codePoint <= 0xE01EF) ||
-    (codePoint >= 0x180B && codePoint <= 0x180D)
+    (codePoint >= 0x180B && codePoint <= 0x180F)
   );
 }
 
@@ -215,13 +253,44 @@ export function normalizeMathAlphanumeric(codePoint: number): string | null {
   if (codePoint >= 0x1D5A0 && codePoint <= 0x1D5B9) return String.fromCharCode(65 + (codePoint - 0x1D5A0));
   if (codePoint >= 0x1D5BA && codePoint <= 0x1D5D3) return String.fromCharCode(97 + (codePoint - 0x1D5BA));
 
+  // sans serif bold latin: U+1D5D4-U+1D5ED -> A-Z, U+1D5EE-U+1D607 -> a-z
+  if (codePoint >= 0x1D5D4 && codePoint <= 0x1D5ED) return String.fromCharCode(65 + (codePoint - 0x1D5D4));
+  if (codePoint >= 0x1D5EE && codePoint <= 0x1D607) return String.fromCharCode(97 + (codePoint - 0x1D5EE));
+
+  // sans serif italic latin: U+1D608-U+1D621 -> A-Z, U+1D622-U+1D63B -> a-z
+  if (codePoint >= 0x1D608 && codePoint <= 0x1D621) return String.fromCharCode(65 + (codePoint - 0x1D608));
+  if (codePoint >= 0x1D622 && codePoint <= 0x1D63B) return String.fromCharCode(97 + (codePoint - 0x1D622));
+
+  // sans serif bold italic latin: U+1D63C-U+1D655 -> A-Z, U+1D656-U+1D66F -> a-z
+  if (codePoint >= 0x1D63C && codePoint <= 0x1D655) return String.fromCharCode(65 + (codePoint - 0x1D63C));
+  if (codePoint >= 0x1D656 && codePoint <= 0x1D66F) return String.fromCharCode(97 + (codePoint - 0x1D656));
+
+  // fraktur: U+1D504-U+1D51D -> A-Z, U+1D51E-U+1D537 -> a-z
+  if (codePoint >= 0x1D504 && codePoint <= 0x1D51D) return String.fromCharCode(65 + (codePoint - 0x1D504));
+  if (codePoint >= 0x1D51E && codePoint <= 0x1D537) return String.fromCharCode(97 + (codePoint - 0x1D51E));
+
+  // bold fraktur: U+1D56C-U+1D585 -> A-Z, U+1D586-U+1D59F -> a-z
+  if (codePoint >= 0x1D56C && codePoint <= 0x1D585) return String.fromCharCode(65 + (codePoint - 0x1D56C));
+  if (codePoint >= 0x1D586 && codePoint <= 0x1D59F) return String.fromCharCode(97 + (codePoint - 0x1D586));
+
+  // double-struck (blackboard bold): U+1D538-U+1D551 -> A-Z, U+1D552-U+1D56B -> a-z
+  if (codePoint >= 0x1D538 && codePoint <= 0x1D551) return String.fromCharCode(65 + (codePoint - 0x1D538));
+  if (codePoint >= 0x1D552 && codePoint <= 0x1D56B) return String.fromCharCode(97 + (codePoint - 0x1D552));
+
   // monospace latin: U+1D670-U+1D689 -> A-Z, U+1D68A-U+1D6A3 -> a-z
   if (codePoint >= 0x1D670 && codePoint <= 0x1D689) return String.fromCharCode(65 + (codePoint - 0x1D670));
   if (codePoint >= 0x1D68A && codePoint <= 0x1D6A3) return String.fromCharCode(97 + (codePoint - 0x1D68A));
 
-  // digits: U+1D7CE-U+1D7D7 (Bold digits 0-9)
+  // digits:
+  // bold digits: U+1D7CE-U+1D7D7 (0-9)
   if (codePoint >= 0x1D7CE && codePoint <= 0x1D7D7) return String.fromCharCode(48 + (codePoint - 0x1D7CE));
-  // monospace digits: U+1D7F6-U+1D7FF
+  // double-struck digits: U+1D7D8-U+1D7E1 (0-9)
+  if (codePoint >= 0x1D7D8 && codePoint <= 0x1D7E1) return String.fromCharCode(48 + (codePoint - 0x1D7D8));
+  // sans-serif digits: U+1D7E2-U+1D7EB (0-9)
+  if (codePoint >= 0x1D7E2 && codePoint <= 0x1D7EB) return String.fromCharCode(48 + (codePoint - 0x1D7E2));
+  // sans-serif bold digits: U+1D7EC-U+1D7F5 (0-9)
+  if (codePoint >= 0x1D7EC && codePoint <= 0x1D7F5) return String.fromCharCode(48 + (codePoint - 0x1D7EC));
+  // monospace digits: U+1D7F6-U+1D7FF (0-9)
   if (codePoint >= 0x1D7F6 && codePoint <= 0x1D7FF) return String.fromCharCode(48 + (codePoint - 0x1D7F6));
 
   return null;

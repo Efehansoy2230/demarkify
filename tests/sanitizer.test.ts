@@ -60,6 +60,12 @@ describe('sanitizeText', () => {
     const result = sanitizeText(dirty);
     expect(result.cleanText).toBe('Line 1\nLine 2\nLine 3');
   });
+
+  it('removes hangul fillers and normalizes line separators', () => {
+    const dirty = 'Line\u31641\u2028Line\uFFA02';
+    const result = sanitizeText(dirty);
+    expect(result.cleanText).toBe('Line1\nLine2');
+  });
 });
 
 describe('transliterateAccentsToAscii', () => {

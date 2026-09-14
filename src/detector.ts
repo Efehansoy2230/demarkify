@@ -70,22 +70,24 @@ export function decodeTagSteganography(text: string): DecodedPayload[] {
  */
 export function decodeZeroWidthBinary(text: string): DecodedPayload[] {
   const payloads: DecodedPayload[] = [];
-  const regex = /[\u200B\u200C\u200D\uFEFF]{8,}/g;
+  const regex = /[\u200B\u200C\u200D\uFEFF\u3164\uFFA0]{8,}/g;
   let match: RegExpExecArray | null;
 
   while ((match = regex.exec(text)) !== null) {
     const raw = match[0];
 
-    // map pairs: (200B->0, 200C->1) and (200C->0, 200D->1) and (200B->0, FEFF->1)
+    // map pairs: (200B->0, 200C->1), (200C->0, 200D->1), (200B->0, FEFF->1), (3164->0, FFA0->1), etc.
     const mappings: [string, string][] = [
       ['\u200B', '\u200C'],
       ['\u200C', '\u200D'],
       ['\u200B', '\uFEFF'],
-      ['\u200C', '\u200B']
+      ['\u200C', '\u200B'],
+      ['\u3164', '\uFFA0'],
+      ['\uFFA0', '\u3164']
     ];
 
     for (const [zeroChar, oneChar] of mappings) {
-      // check if sequence only contains followiong two chars
+      // check if sequence only contains following two chars
       const binaryBits: string[] = [];
       let valid = true;
       for (const ch of raw) {
@@ -109,7 +111,7 @@ export function decodeZeroWidthBinary(text: string): DecodedPayload[] {
           const decoded = Buffer.from(bytes).toString('utf8');
           payloads.push({
             type: 'zero_width_binary',
-            description: `zero width binary payload (0=${zeroChar === '\u200B' ? 'ZWSP' : 'ZWNJ'}, 1=${oneChar === '\u200C' ? 'ZWNJ' : 'ZWJ'})`,
+            description: `zero width binary payload (0=${zeroChar.codePointAt(0)!.toString(16)}, 1=${oneChar.codePointAt(0)!.toString(16)})`,
             rawPayload: raw,
             byteCount: Buffer.byteLength(raw, 'utf8'),
             decodedText: decoded

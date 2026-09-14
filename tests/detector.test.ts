@@ -45,6 +45,17 @@ describe('detectWatermarks', () => {
     expect(result.clean).toBe(false);
     expect(result.categories.control_char).toBe(2);
   });
+
+  it('detects hangul fillers, line separators, and formatting controls', () => {
+    const text = 'text\u3164with\u2028line\u2029sep\u0085and\u206Acontrol';
+    const result = detectWatermarks(text);
+    expect(result.clean).toBe(false);
+    expect(result.matches.some(m => m.hex === 'U+3164')).toBe(true);
+    expect(result.matches.some(m => m.hex === 'U+2028')).toBe(true);
+    expect(result.matches.some(m => m.hex === 'U+2029')).toBe(true);
+    expect(result.matches.some(m => m.hex === 'U+0085')).toBe(true);
+    expect(result.matches.some(m => m.hex === 'U+206A')).toBe(true);
+  });
 });
 
 describe('steganography decoders', () => {
