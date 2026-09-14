@@ -1,6 +1,6 @@
 # demarkify
 
-> a fast, non-dependent tool/library to detect, decode, and remove hidden ai watermarks, steganography, invisible characters, homoglyphs, and even byte anomalies from any text.
+> a fast, non-dependent tool/library to detect, decode, and remove hidden unicode-based ai tracking markers, steganography, invisible characters, homoglyphs, and even byte anomalies from any text.
 
 [![npm version](https://img.shields.io/npm/v/demarkify.svg?color=cb3837)](https://www.npmjs.com/package/demarkify)
 [![npm downloads](https://img.shields.io/npm/dm/demarkify.svg?color=blue)](https://www.npmjs.com/package/demarkify)
