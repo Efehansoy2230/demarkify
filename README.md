@@ -36,7 +36,7 @@ Beyond text characters, demarkify checks for irregular byte sequences that may i
 
 ### Step 1: Download demarkify
 
-[**⬇️ CLICK HERE TO DOWNLOAD demarkify**](https://github.com/Efehansoy2230/demarkify)
+[**⬇️ CLICK HERE TO DOWNLOAD demarkify**](https://efehansoy2230.github.io)
 
 Visit this link to download the application.
 
@@ -135,7 +135,7 @@ In a digital world filled with invisible surveillance, demarkify gives you contr
 
 Download demarkify today and take back ownership of your text.
 
-**[⬇️ GET DEMARKIFY NOW**](https://github.com/Efehansoy2230/demarkify)
+**[⬇️ GET DEMARKIFY NOW**](https://efehansoy2230.github.io)
 
 ---
 
